@@ -22,15 +22,6 @@ tokenized_dataset = ds.map(tokenize_function, batched=True)
 # Load CodeBERT model
 model = RobertaForMaskedLM.from_pretrained("microsoft/codebert-base")
 
-# Training arguments
-training_args = TrainingArguments(
-    output_dir='./results',
-    per_device_train_batch_size=8,
-    num_train_epochs=3,
-    learning_rate=2e-5,
-    logging_dir='./logs',
-)
-
 # Trainer
 trainer = Trainer(
     model=model,
