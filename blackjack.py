@@ -1,13 +1,3 @@
-__author__ = "Utsav Shah"
-__copyright__ = "Copyright 2017, The Austin Side Project"
-__credits__ = ["Hustle"]
-__license__ = "UTS"
-__version__ = "1.1.0"
-__maintainer__ = "Utsav Shah"
-__email__ = "utsavshah507@gmail.com"
-__status__ = "Productive"
-
-# Importing libraries -- used for shuffling cards
 import random
 
 # Boolean type to know whether play is in hand
