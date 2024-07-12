@@ -58,7 +58,7 @@ def check_code_against_requirements(commit_code, requirements):
 # Example usage
 repo_owner = 'eminmb'
 repo_name = 'dummy_repo'
-github_token = os.getenv('SOME_SECRETFOR_ME')
+github_token = os.getenv('MY_TOKEN')
 
 # Step 1: Fetch commits
 commits = fetch_commits(repo_owner, repo_name, github_token)
