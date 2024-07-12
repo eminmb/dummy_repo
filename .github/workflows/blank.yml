@@ -25,6 +25,8 @@ jobs:
 
       - name: Run Python script
         run: python run_gemma.py
+        env:
+          MY_TOKEN: ${{ secrets.MY_TOKEN }}
 
       - name: Commit results
         run: |
