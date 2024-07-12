@@ -1,0 +1,37 @@
+name: Run Python Code On Commit
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11.7'  # Specify the version of Python you need
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Python script
+        run: python run_gemma.py
+
+      - name: Commit results
+        run: |
+          git config --global user.email "emin_bekar28@hotmail.com"
+          git config --global user.name "eminmb"
+          git checkout -b gh-pages
+          mv result.json result.json
+          git add result.json
+          git commit -m "Update results"
+          git push --force https://github.com/eminmb/dummy_repo gh-pages
