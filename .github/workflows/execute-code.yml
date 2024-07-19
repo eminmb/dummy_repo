@@ -24,20 +24,24 @@ jobs:
           pip install requests
           pip install langchain_community
 
-      - name: Install Ollama and Gemma 2
+      - name: Install Ollama
         run: |
-          # Command to install Ollama
           curl -sSL https://ollama.com/install.sh | bash
-          # Command to install Gemma 2, replace with the correct command
-          ollama run gemma2
+
+      - name: Start Ollama Service
+        run: |
+          nohup ollama serve > ollama.log 2>&1 &
+          sleep 30  # Wait for Ollama to start up, adjust if necessary
+          curl -I http://127.0.0.1:11434 || exit 1  # Check if Ollama is running
 
       - name: Execute Python script
         id: execute_code
         env:
           MY_TOKEN: ${{ secrets.MY_TOKEN }}  # Use your GitHub token stored as a secret
-        run: python python_code.py
+        run: python run_gemma.py
 
       - name: Add result to job summary
         if: always()  # Ensure this step runs even if previous steps fail
         run: |
           echo "## Execution Result" >> $GITHUB_STEP_SUMMARY
+          
