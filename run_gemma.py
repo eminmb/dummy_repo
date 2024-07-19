@@ -1,7 +1,6 @@
 import os
 import requests
 import json
-import base64
 from langchain_community.llms import Ollama
 
 # Function to fetch commits from GitHub
@@ -26,19 +25,6 @@ def fetch_commit_details(repo_owner, repo_name, sha, token):
     else:
         raise Exception(f"Failed to fetch commit details: {response.status_code} {response.text}")
 
-# Function to fetch README file as requirements
-def fetch_readme(repo_owner, repo_name, token):
-    url = f'https://api.github.com/repos/{repo_owner}/{repo_name}/contents/README.md'
-    headers = {'Authorization': f'token {token}'}
-    response = requests.get(url, headers=headers)
-    
-    if response.status_code == 200:
-        data = response.json()
-        content = base64.b64decode(data['content']).decode('utf-8')
-        return content
-    else:
-        raise Exception(f"Failed to fetch README: {response.status_code} {response.text}")
-
 # Function to analyze with Gemma 2 via Ollama
 def analyze_with_gemma2(input_text):
     llm = Ollama(model="gemma2")
@@ -48,11 +34,6 @@ def analyze_with_gemma2(input_text):
 # Function to check commit message and code relationship
 def check_message_code_relationship(commit_message, commit_code):
     input_text = f"This is the commit message: {commit_message} This is the committed code: {commit_code} Does the commit message accurately and well express what the code does?"
-    return analyze_with_gemma2(input_text)
-
-# Function to check code against requirements
-def check_code_against_requirements(commit_code, requirements):
-    input_text = f"This is the committed code: {commit_code} These are the requirements: {requirements} Does the code satisfy the requirements?"
     return analyze_with_gemma2(input_text)
 
 # Example usage
@@ -79,19 +60,15 @@ commit_messages_and_code = [
     for detail in commit_details
 ]
 
-# Step 3: Fetch README as requirements
-readme_content = fetch_readme(repo_owner, repo_name, github_token)
-requirements = readme_content.splitlines()  # Assuming each requirement is on a new line
-
 # Step 4: Analyze commit message and code relationship
+results = []
 for commit in commit_messages_and_code[:1]:  # Display first one for brevity
     commit_message = json.dumps(commit['message'])
     commit_code = json.dumps(commit['files'])
     output_message_code = check_message_code_relationship(commit_message, commit_code)
-    print(f"Message-Code Relationship Analysis Input: This is the commit message: {commit_message} This is the committed code: {commit_code}")
-    print(f"Output: {output_message_code}")
+    result = f"Message-Code Relationship Analysis Input: This is the commit message: {commit_message} This is the committed code: {commit_code}\nOutput: {output_message_code}\n"
+    results.append(result)
+    print(result)
 
-# Step 5: Analyze code against requirements
-output_code_requirements = check_code_against_requirements(commit_code, requirements)
-print(f"Code-Requirements Analysis Input: This is the committed code: {commit_code} These are the requirements: {requirements}")
-print(f"Output: {output_code_requirements}")
+with open('result.txt', 'w') as f:
+    f.write('\n'.join(results))
