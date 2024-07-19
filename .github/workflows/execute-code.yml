@@ -30,14 +30,12 @@ jobs:
           run ollama
           ollama run gemma2
 
-      - name: Pull Gemma2 Model
-        run: |
-          ollama pull gemma2  # Ensure the model is downloaded and available
 
       - name: Start Ollama Service
         run: |
           nohup ollama serve > ollama.log 2>&1 &
           sleep 30  # Wait for Ollama to start up, adjust if necessary
+          ollama pull gemma2
           curl -I http://127.0.0.1:11434 || exit 1  # Check if Ollama is running
 
       - name: Execute Python script
