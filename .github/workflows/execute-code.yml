@@ -28,7 +28,7 @@ jobs:
         run: |
           curl -sSL https://ollama.com/install.sh | bash
           
-          ollama install gemma2
+          ollama run gemma2
 
       - name: Pull Gemma2 Model
         run: |
