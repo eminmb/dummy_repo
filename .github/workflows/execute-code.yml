@@ -1,0 +1,32 @@
+name: Execute Code on Push
+
+on:
+  push:
+    branches:
+      - main  # Change to your branch if needed
+
+jobs:
+  execute-code:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+
+      - name: Execute Code
+        id: execute_code
+        run: |
+          # A simple shell command to demonstrate
+          echo "Hello, world! This is a test script." > result.txt
+          
+          # Display result in the log
+          cat result.txt
+
+      - name: Add result to job summary
+        if: always()  # Ensure this step runs even if previous steps fail
+        run: |
+          echo "## Execution Result" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          cat result.txt >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
