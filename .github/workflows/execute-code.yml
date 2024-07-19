@@ -37,7 +37,7 @@ jobs:
       - name: Execute Python script
         id: execute_code
         env:
-          MY_TOKEN: ${{ secrets.MY_TOKEN }}  # Use your GitHub token stored as a secret
+          RUN_GEMMA_TOKEN: ${{ secrets.RUN_GEMMA_TOKEN }}  # Use your GitHub token stored as a secret
         run: python run_gemma.py
 
       - name: Add result to job summary
