@@ -67,8 +67,5 @@ for commit in commit_messages_and_code[:1]:  # Display first one for brevity
     commit_code = json.dumps(commit['files'])
     output_message_code = check_message_code_relationship(commit_message, commit_code)
     result = f"Message-Code Relationship Analysis Input: This is the commit message: {commit_message} This is the committed code: {commit_code}\nOutput: {output_message_code}\n"
-    results.append(result)
     print(result)
 
-with open('result.txt', 'w') as f:
-    f.write('\n'.join(results))
