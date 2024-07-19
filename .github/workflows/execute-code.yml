@@ -27,16 +27,17 @@ jobs:
       - name: Install Ollama and gemma2
         run: |
           curl -sSL https://ollama.com/install.sh | bash
-          
-          ollama run gemma2
+        
 
 
       - name: Start Ollama Service
         run: |
           nohup ollama serve > ollama.log 2>&1 &
           sleep 30  # Wait for Ollama to start up, adjust if necessary
-          ollama pull gemma2
           curl -I http://127.0.0.1:11434 || exit 1  # Check if Ollama is running
+          ollama pull gemma2
+          ollama run gemma2
+          
 
       - name: Execute Python script
         id: execute_code
