@@ -26,7 +26,7 @@ jobs:
 
       - name: Install Ollama and gemma2
         run: |
-          curl -sSL https://ollama/install | bash
+          curl -sSL https://ollama.com/install.sh | bash
           
           ollama install gemma2
 
