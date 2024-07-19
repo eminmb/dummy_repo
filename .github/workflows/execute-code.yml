@@ -24,9 +24,11 @@ jobs:
           pip install requests
           pip install langchain_community
 
-      - name: Install Ollama
+      - name: Install Ollama and gemma2
         run: |
           curl -sSL https://ollama/install | bash
+          
+          ollama install gemma2
 
       - name: Pull Gemma2 Model
         run: |
