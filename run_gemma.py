@@ -39,7 +39,7 @@ def check_message_code_relationship(commit_message, commit_code):
 # Example usage
 repo_owner = 'eminmb'
 repo_name = 'dummy_repo'
-github_token = os.getenv('MY_TOKEN')
+github_token = os.getenv('RUN_GEMMA_TOKEN')
 
 # Step 1: Fetch commits
 commits = fetch_commits(repo_owner, repo_name, github_token)
