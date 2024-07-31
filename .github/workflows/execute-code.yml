@@ -1,6 +1,7 @@
-name: Execute Code on Push
 
-on:
+#name: Execute Code on Push
+
+#on:
   push:
     branches:
       - main  # Change to your branch if needed
@@ -57,4 +58,4 @@ jobs:
         run: |
           echo "## Execution Result" >> $GITHUB_STEP_SUMMARY
           cat my_results.txt >> $GITHUB_STEP_SUMMARY
-         
+  
