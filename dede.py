@@ -9,6 +9,7 @@ def webhook():
     data = request.json
     owner_repo_name = data['owner_repo_name']
     token_token = data['token_token']
+    
     commits = fetch_commits(owner_repo_name, token_token)
     commit_details = [fetch_commit_details(owner_repo_name, commit['sha'], token_token) for commit in commits]
 
