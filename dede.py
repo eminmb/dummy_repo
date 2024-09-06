@@ -36,7 +36,16 @@ def fetch_commits(repo_name, token):
         return response.json()
     else:
         raise Exception(f"Failed to fetch commits: {response.status_code} {response.text}")
-    
+
+def fetch_commits(repo_name, token):
+    url = f'https://api.github.com/repos/{repo_name}/commits'
+    headers = {'Authorization': f'token {token}'}
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        raise Exception(f"Failed to fetch commits: {response.status_code} {response.text}")
+@app.route('/', methods=['POST'])    
 def fetch_commit_details(repo_name, sha, token):
     url = f'https://api.github.com/repos/{repo_name}/commits/{sha}'
     headers = {'Authorization': f'token {token}'}
