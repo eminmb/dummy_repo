@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 
-# Function to scrape article titles and links from a news website
+# Function to scrape article titles and links from a news website 
 def scrape_news(url):
     # Send a GET request to the provided URL
     response = requests.get(url)
