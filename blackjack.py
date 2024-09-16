@@ -10,7 +10,7 @@ chip_pool = 100
 # raw_input('Enter the amount for buy-in: ')
 print 'Your buy-in amount is: ',chip_pool
 
-bet = 1
+bet = 1 
 
 restart_phrase = "Press d to deal the cards again, or press q to quit."
 
