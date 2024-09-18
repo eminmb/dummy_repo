@@ -37,7 +37,7 @@ class Card:
 	def grab_suit(self):
 		return self.suit
 
-	def grab_rank(rank):
+	def grab_rank():
 		return self.rank
 
 	def draw(self):
