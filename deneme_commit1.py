@@ -3,3 +3,4 @@ list_2 = ['a', 'b', 'c']
 
 for i, j in zip(list_1, list_2):
     print(i, j)  
+ 
