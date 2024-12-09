@@ -1,4 +1,5 @@
-def function(a): return a*a*a*a*a*a*a*a*a
+def function(a):
+      print(a)
+      return a*a*a*a*a*a*a*a*a
       
-
  
